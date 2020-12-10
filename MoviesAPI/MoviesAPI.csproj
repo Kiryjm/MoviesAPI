@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\GenresController.cs~RF29b9d26.TMP" />
+    <None Remove="Controllers\GenresController.cs~RF2a795c7.TMP" />
+    <None Remove="Services\InMemoryRepository.cs~RF25a8ca1.TMP" />
+  </ItemGroup>
+
+
+</Project>
