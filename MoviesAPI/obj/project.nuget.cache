@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aDlHl1j8+ntgkRJbah4RXDqlwduxQIYT/TXNBbQJQ+zSRC/gCeJkSk2/4sABbR4++7am2c7QXO0RyTr75NDo5A==",
+  "dgSpecHash": "6/C3xxQgq9fNKHU4/0BGiHM0DqafYZWDn6lSukDPfIZOMcfk1pUQAZLqhjNyWH6W/YvnOMthQCr+SJHjhtxwvA==",
   "success": true,
-  "projectFilePath": "G:\\root\\C#\\MoviesAPI\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
+  "projectFilePath": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

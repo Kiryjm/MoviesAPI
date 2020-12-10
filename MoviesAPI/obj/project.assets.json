@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\root\\C#\\MoviesAPI\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
+      "projectUniqueName": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
       "projectName": "MoviesAPI",
-      "projectPath": "G:\\root\\C#\\MoviesAPI\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
+      "projectPath": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
       "packagesPath": "C:\\Users\\Kirill\\.nuget\\packages\\",
-      "outputPath": "G:\\root\\C#\\MoviesAPI\\MoviesAPI\\MoviesAPI\\obj\\",
+      "outputPath": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kirill\\AppData\\Roaming\\NuGet\\NuGet.Config",
