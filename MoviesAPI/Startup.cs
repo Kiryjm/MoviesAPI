@@ -46,6 +46,7 @@ namespace MoviesAPI
             services.AddResponseCaching();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             services.AddTransient<MyActionFilter>();
+            services.AddTransient<Microsoft.Extensions.Hosting.IHostedService, WriteToFileHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
