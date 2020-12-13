@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MoviesAPI.Filters;
 using MoviesAPI.Services;
 
 namespace MoviesAPI
@@ -28,21 +30,24 @@ namespace MoviesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(MyExceptionFilter));
+            });
+
             // AddSingleton allows to get the only one instance of InMemoryRepository
             // every time referring to service
-
             services.AddSingleton<IRepository, InMemoryRepository>();
 
             // AddTransient allows to get new instance of InMemoryRepository every time referring to service
             //(so there can be many instances)
-
             //services.AddTransient<IRepository, InMemoryRepository>(); 
 
             // AddScoped allows to get instance of InMemoryRepository with lifetime within same  HTTP request
-
             //services.AddScoped<IRepository, InMemoryRepository>();
-
+            services.AddResponseCaching();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+            services.AddTransient<MyActionFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +91,10 @@ namespace MoviesAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
