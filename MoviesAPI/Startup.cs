@@ -30,10 +30,8 @@ namespace MoviesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options =>
-            {
-                options.Filters.Add(typeof(MyExceptionFilter));
-            });
+            services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
+                .AddXmlDataContractSerializerFormatters();
 
             // AddSingleton allows to get the only one instance of InMemoryRepository
             // every time referring to service
