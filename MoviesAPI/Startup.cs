@@ -43,44 +43,11 @@ namespace MoviesAPI
 
             // AddScoped allows to get instance of InMemoryRepository with lifetime within same  HTTP request
             //services.AddScoped<IRepository, InMemoryRepository>();
-            services.AddResponseCaching();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-            services.AddTransient<MyActionFilter>();
-            services.AddTransient<Microsoft.Extensions.Hosting.IHostedService, WriteToFileHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //This method interrupt http request pipeline to get every single body from http response to the stream
-            //and log it to the Visual Studio console 
-            app.Use(async (context, next) =>
-            {
-                using (var swapStream = new MemoryStream())
-                {
-                    var originalResponseBody = context.Response.Body;
-                    context.Response.Body = swapStream;
-
-                    await next.Invoke();
-
-                    swapStream.Seek(0, SeekOrigin.Begin);
-                    string responseBody = new StreamReader(swapStream).ReadToEnd();
-                    swapStream.Seek(0, SeekOrigin.Begin);
-
-                    await swapStream.CopyToAsync(originalResponseBody);
-                    context.Response.Body = originalResponseBody;
-
-                    logger.LogInformation(responseBody);
-                }
-            });
-
-            app.Map("/map1", application =>
-            {
-                application.Run(async context =>
-                {
-                    await context.Response.WriteAsync("Short-circuiting pipeline");
-                });
-            });
 
             if (env.IsDevelopment())
             {
@@ -90,8 +57,6 @@ namespace MoviesAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseResponseCaching();
 
             app.UseAuthentication();
 

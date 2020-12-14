@@ -29,29 +29,17 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet] //api/genres
-        [HttpGet("list")] //api/genres/list
-        [HttpGet("/allgenres")] //replacing api/genres/list with allgenres
-        //api/genres
-        //[ResponseCache(Duration = 60 )]
-        [ServiceFilter(typeof(MyActionFilter))]
         public async Task<ActionResult<List<Genre>>> Get()
         {
-            logger.LogInformation("Getting all the genres");
             return await repository.GetAllGenres();
         }
 
         [HttpGet("{Id:int}", Name = "getGenre")] //api/genres/1
-        [ServiceFilter(typeof(MyActionFilter))]
         public ActionResult<Genre> Get(int Id, string param2)
         {
-            logger.LogDebug("Get by Id method executing...");
             var genre = repository.GetGenreById(Id);
             if (genre == null)
             {
-                logger.LogWarning($"Genre with Id {Id} not found");
-                logger.LogError("This is an error");
-                //throw new ApplicationException();
-
                 return NotFound();
             }
             return genre;
