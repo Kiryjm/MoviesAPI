@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.Extensions.Logging;
 using MoviesAPI.DTOs;
 using MoviesAPI.Entities;
@@ -68,16 +69,31 @@ namespace MoviesAPI.Controllers
             return new CreatedAtRouteResult("getGenre", new { genreDTO.Id }, genreDTO);
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Genre genre)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, [FromBody] GenreCreationDTO genreCreation)
         {
+            var genre = mapper.Map<Genre>(genreCreation);
+            genre.Id = id;
+
+            //Indication of modification existing in db resource genre
+            context.Entry(genre).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+
             return NoContent();
 
         }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
+            var exists = await context.Genres.AnyAsync(x => x.Id == id);
+            if (!exists)
+            {
+                return NotFound();
+            }
+            context.Remove(new Genre { Id = id });
+            await context.SaveChangesAsync();
+
             return NoContent();
 
         }
