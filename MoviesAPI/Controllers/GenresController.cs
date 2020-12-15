@@ -65,7 +65,10 @@ namespace MoviesAPI.Controllers
             await context.SaveChangesAsync();
             var genreDTO = mapper.Map<GenreDTO>(genre);
 
-
+            //return location of created resource: 
+            //route name to access tne newly created resource, 
+            //route values of action with such route name
+            //and created object itself
             return new CreatedAtRouteResult("getGenre", new { genreDTO.Id }, genreDTO);
         }
 
