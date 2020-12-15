@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,16 +36,18 @@ namespace MoviesAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
                 .AddXmlDataContractSerializerFormatters();
+            services.AddAutoMapper(typeof(Startup));
+
 
             // AddSingleton allows to get the only one instance of InMemoryRepository
             // every time referring to service
-            services.AddSingleton<IRepository, InMemoryRepository>();
+            //services.AddSingleton<IRepository, InMemoryRepository>();
 
             // AddTransient allows to get new instance of InMemoryRepository every time referring to service
             //(so there can be many instances)
             //services.AddTransient<IRepository, InMemoryRepository>(); 
 
-            // AddScoped allows to get instance of InMemoryRepository with lifetime within same  HTTP request
+            // AddScoped allows to get instance of InMemoryRepository with lifetime within same HTTP request
             //services.AddScoped<IRepository, InMemoryRepository>();
         }
 

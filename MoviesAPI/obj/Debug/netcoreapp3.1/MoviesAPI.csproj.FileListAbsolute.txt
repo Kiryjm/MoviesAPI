@@ -79,5 +79,7 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\ne
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Humanizer.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\AutoMapper.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csproj.CoreCompileInputs.cache
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.MvcApplicationPartsAssemblyInfo.cache
