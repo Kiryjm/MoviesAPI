@@ -26,7 +26,6 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\MoviesAPI.runtimeco
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\MoviesAPI.runtimeconfig.dev.json
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\MoviesAPI.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\MoviesAPI.pdb
-G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csprojAssemblyReference.cache
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.AssemblyInfoInputs.cache
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.AssemblyInfo.cs
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.RazorTargetAssemblyInfo.cache
@@ -81,5 +80,9 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Humanizer.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\AutoMapper.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csprojAssemblyReference.cache
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csproj.CoreCompileInputs.cache
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.MvcApplicationPartsAssemblyInfo.cache
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Azure.KeyVault.Core.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Blob.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Common.dll

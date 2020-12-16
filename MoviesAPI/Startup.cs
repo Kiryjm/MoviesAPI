@@ -37,7 +37,7 @@ namespace MoviesAPI
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
                 .AddXmlDataContractSerializerFormatters();
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddTransient<IFileStorageService, AzureStorageService>();
 
             // AddSingleton allows to get the only one instance of InMemoryRepository
             // every time referring to service
