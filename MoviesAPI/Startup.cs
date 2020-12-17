@@ -37,7 +37,14 @@ namespace MoviesAPI
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
                 .AddXmlDataContractSerializerFormatters();
             services.AddAutoMapper(typeof(Startup));
-            services.AddTransient<IFileStorageService, AzureStorageService>();
+
+            //configure service for storing images in Azure store
+            //services.AddTransient<IFileStorageService, AzureStorageService>();
+
+            //configure service for storing images in local store (wwwroot directory)
+            services.AddTransient<IFileStorageService, InAppStorageService>();
+            services.AddHttpContextAccessor();
+
 
             // AddSingleton allows to get the only one instance of InMemoryRepository
             // every time referring to service
@@ -61,6 +68,9 @@ namespace MoviesAPI
             }
 
             app.UseHttpsRedirection();
+
+            //using middleware for storing images localy
+            app.UseStaticFiles();
 
             app.UseRouting();
 
