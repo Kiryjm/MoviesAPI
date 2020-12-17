@@ -39,10 +39,10 @@ namespace MoviesAPI
             services.AddAutoMapper(typeof(Startup));
 
             //configure service for storing images in Azure store
-            //services.AddTransient<IFileStorageService, AzureStorageService>();
+            services.AddTransient<IFileStorageService, AzureStorageService>();
 
             //configure service for storing images in local store (wwwroot directory)
-            services.AddTransient<IFileStorageService, InAppStorageService>();
+            //services.AddTransient<IFileStorageService, InAppStorageService>();
             services.AddHttpContextAccessor();
 
 

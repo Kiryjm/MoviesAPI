@@ -75,5 +75,49 @@ namespace MoviesAPI.Controllers
             //route values of action with such route name and created object itself
             return new CreatedAtRouteResult("getPerson", new { person.Id }, personDTO);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, [FromForm] PersonCreationDTO personCreation)
+        {
+            var personDB = await context.People.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (personDB == null)
+            {
+                return NotFound();
+            }
+
+            personDB = mapper.Map(personCreation, personDB);
+
+            if (personCreation.Picture != null)
+            {
+                //Representing file as byte array
+                using (var memoryStream = new MemoryStream())
+                {
+                    await personCreation.Picture.CopyToAsync(memoryStream);
+                    var content = memoryStream.ToArray();
+                    var extension = Path.GetExtension(personCreation.Picture.FileName);
+                    personDB.Picture =
+                        await fileStorageService.EditFile(content, extension, containerName, personDB.Picture, 
+                            personCreation.Picture.ContentType);
+                }
+            }
+
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var exists = await context.People.AnyAsync(x => x.Id == id);
+            if (!exists)
+            {
+                return NotFound();
+            }
+            context.Remove(new Person { Id = id });
+            await context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
