@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesAPI.DTOs;
@@ -117,6 +118,37 @@ namespace MoviesAPI.Controllers
             context.Remove(new Person { Id = id });
             await context.SaveChangesAsync();
 
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<PersonPatchDTO> patchDocument)
+        {
+            if (patchDocument == null)
+            {
+                return BadRequest();
+            }
+
+            var entityFromDB = await context.People.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (entityFromDB == null)
+            {
+                return NotFound();
+            }
+
+            var entityDTO = mapper.Map<PersonPatchDTO>(entityFromDB);
+
+            //apply changes from json document to the entityDTO
+            patchDocument.ApplyTo(entityDTO, ModelState);
+            var isValid = TryValidateModel(entityDTO);
+            if (!isValid)
+            {
+                //passing ModelState to indicate occured validation errors
+                return BadRequest(ModelState);
+            }
+
+            mapper.Map(entityDTO, entityFromDB);
+            await context.SaveChangesAsync();
             return NoContent();
         }
     }

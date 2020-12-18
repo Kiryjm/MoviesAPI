@@ -35,6 +35,7 @@ namespace MoviesAPI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
+                .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
             services.AddAutoMapper(typeof(Startup));
 

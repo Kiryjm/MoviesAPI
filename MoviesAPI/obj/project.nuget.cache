@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pbJvlh0zjxhQjAxLflMfhMPxCG1PTwJ7En4/REfoZq9XKvG2Vv5Eh2N/pblAy+qXOZOlT2lEkAwpVitKqFBN8w==",
+  "dgSpecHash": "RcxMxi3b7Tk71YAX/2Pkv/FvaOfWk403MdET1hUWrgFXb4s6YMeUL6639s7s+DgqJg8GXFC4HWch8jbmA30+IQ==",
   "success": true,
   "projectFilePath": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\Kirill\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.10\\microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.10\\microsoft.aspnetcore.jsonpatch.3.1.10.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.10\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.10.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.azure.keyvault.core\\2.0.4\\microsoft.azure.keyvault.core.2.0.4.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.azure.storage.blob\\11.2.2\\microsoft.azure.storage.blob.11.2.2.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.azure.storage.common\\11.2.2\\microsoft.azure.storage.common.11.2.2.nupkg.sha512",
@@ -41,7 +43,8 @@
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\netstandard.library\\2.0.1\\netstandard.library.2.0.1.nupkg.sha512",
-    "C:\\Users\\Kirill\\.nuget\\packages\\newtonsoft.json\\10.0.2\\newtonsoft.json.10.0.2.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
