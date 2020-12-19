@@ -15,6 +15,6 @@ namespace MoviesAPI.Entities
         [StringLength(40)]
         [FirstLetterUppercase] // Custom attribute validation
         public string Name { get; set; }
-
+        public List<MoviesGenres> MoviesGenres { get; set; }
     }
 }

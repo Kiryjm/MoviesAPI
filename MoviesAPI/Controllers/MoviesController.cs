@@ -55,6 +55,8 @@ namespace MoviesAPI.Controllers
         {
             var movie = mapper.Map<Movie>(movieCreation);
 
+            return Ok();
+
             if (movieCreation.Poster != null)
             {
                 //Representing file as byte array

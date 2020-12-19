@@ -13,5 +13,6 @@ namespace MoviesAPI.DTOs
         [FileSizeValidator(4)]
         [ContentTypeValidator(ContentTypeGroup.Image)]
         public IFormFile Poster { get; set; }
+        public List<int> GenresIds { get; set; }
     }
 }
