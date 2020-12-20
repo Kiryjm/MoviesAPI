@@ -21,8 +21,32 @@ namespace MoviesAPI.Helpers
             CreateMap<Person, PersonPatchDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<MovieCreationDTO, Movie>()
-                .ForMember(x => x.Poster, options => options.Ignore());
+                .ForMember(x => x.Poster, options => options.Ignore())
+                .ForMember(x => x.MoviesGenres, options => options.MapFrom(MapMoviesGenres))
+                .ForMember(x => x.MoviesActors, options => options.MapFrom(MapMoviesActors));
             CreateMap<Movie, MoviePatchDTO>().ReverseMap();
+        }
+
+        private List<MoviesGenres> MapMoviesGenres(MovieCreationDTO movieCreation, Movie movie)
+        {
+            var result = new List<MoviesGenres>();
+            foreach (var id in movieCreation.GenresIds)
+            {
+                result.Add(new MoviesGenres { GenreId = id });
+            }
+
+            return result;
+        }
+
+        private List<MoviesActors> MapMoviesActors(MovieCreationDTO movieCreation, Movie movie)
+        {
+            var result = new List<MoviesActors>();
+            foreach (var actor in movieCreation.Actors)
+            {
+                result.Add(new MoviesActors { PersonId = actor.PersonId, Character = actor.Character });
+            }
+
+            return result;
         }
     }
 }

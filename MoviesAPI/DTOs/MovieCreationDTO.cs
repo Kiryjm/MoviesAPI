@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MoviesAPI.Helpers;
 using MoviesAPI.Validations;
 
 namespace MoviesAPI.DTOs
@@ -13,6 +15,11 @@ namespace MoviesAPI.DTOs
         [FileSizeValidator(4)]
         [ContentTypeValidator(ContentTypeGroup.Image)]
         public IFormFile Poster { get; set; }
+
+        [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
         public List<int> GenresIds { get; set; }
+
+        [ModelBinder(BinderType = typeof(TypeBinder<List<ActorDTO>>))]
+        public List<ActorDTO> Actors { get; set; }
     }
 }
