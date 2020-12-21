@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesAPI.DTOs;
 using MoviesAPI.Entities;
+using MoviesAPI.Helpers;
 using MoviesAPI.Services;
 
 namespace MoviesAPI.Controllers
@@ -31,9 +32,60 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<MovieDTO>>> Get()
+        public async Task<ActionResult<IndexMoviePageDTO>> Get()
         {
-            var movies = await context.Movies.ToListAsync();
+            var top = 6;
+            var thisYear = DateTime.Today.Year;
+            var thisYearReleases = await context.Movies
+                .Where(x => x.ReleaseDate.Year == thisYear)
+                .OrderBy(x => x.ReleaseDate)
+                .Take(top)
+                .ToListAsync();
+
+            var inTheaters = await context.Movies
+                .Where(x => x.InTheaters)
+                .Take(top)
+                .ToListAsync();
+
+            var result = new IndexMoviePageDTO();
+            result.InTheaters = mapper.Map<List<MovieDTO>>(inTheaters);
+            result.ThisYearReleases = mapper.Map<List<MovieDTO>>(thisYearReleases);
+
+            return result;
+        }
+
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<MovieDTO>>> Filter([FromQuery] FilterMoviesDTO filterMoviesDTO)
+        {
+            var moviesQueryable = context.Movies.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filterMoviesDTO.Title))
+            {
+                moviesQueryable = moviesQueryable.Where(x => x.Title.Contains(filterMoviesDTO.Title));
+            }
+
+            if (filterMoviesDTO.InTheaters)
+            {
+                moviesQueryable = moviesQueryable.Where(x => x.InTheaters);
+            }
+
+            if (filterMoviesDTO.ThisYearReleases)
+            {
+                var thisYear = DateTime.Today.Year;
+                moviesQueryable = moviesQueryable.Where(x => x.ReleaseDate.Year == thisYear);
+            }
+
+            if (filterMoviesDTO.GenreId != 0)
+            {
+                moviesQueryable = moviesQueryable.Where(x => x.MoviesGenres.Select(y => y.GenreId)
+                    .Contains(filterMoviesDTO.GenreId));
+            }
+
+            //why HttpContext not HttpContextExtension???
+            await HttpContext
+                .InsertPaginationParametersInResponse(moviesQueryable, filterMoviesDTO.RecordsPerPage);
+
+            var movies = await moviesQueryable.Paginate(filterMoviesDTO.Pagination).ToListAsync();
             return mapper.Map<List<MovieDTO>>(movies);
         }
 
