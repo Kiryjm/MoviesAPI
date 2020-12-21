@@ -22,6 +22,7 @@ namespace MoviesAPI
 {
     public class Startup
     {
+        // IConfiguration configuration object serves as abstraction on appsettings.json
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,13 +35,16 @@ namespace MoviesAPI
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
+
             services.AddAutoMapper(typeof(Startup));
 
             //configure service for storing images in Azure store
             services.AddTransient<IFileStorageService, AzureStorageService>();
+
             services.AddTransient<IHostedService, MovieInTheaterService>();
 
             //configure service for storing images in local store (wwwroot directory)

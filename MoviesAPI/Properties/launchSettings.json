@@ -11,15 +11,14 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": false,
       "launchUrl": "api/genres",
       "environmentVariables": {
+        "lastname": "Puzanov from env variable",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "MoviesAPI": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
