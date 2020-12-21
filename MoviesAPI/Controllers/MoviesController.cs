@@ -90,16 +90,20 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "getMovie")]
-        public async Task<ActionResult<MovieDTO>> Get(int id)
+        public async Task<ActionResult<MovieDetailsDTO>> Get(int id)
         {
-            var movie = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+            var movie = await context.Movies
+                    //Include in LINQ is like join on ids of related tables
+                .Include(x => x.MoviesActors).ThenInclude(x => x.Person)
+                    .Include(x => x.MoviesGenres).ThenInclude(x => x.Genre)
+                    .FirstOrDefaultAsync(x => x.Id == id);
 
             if (movie == null)
             {
                 return NotFound();
             }
 
-            return mapper.Map<MovieDTO>(movie);
+            return mapper.Map<MovieDetailsDTO>(movie);
         }
 
         [HttpPost]
