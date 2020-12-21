@@ -17,6 +17,7 @@ namespace MoviesAPI
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
+            //This method configures severa configuration providers
             Host.CreateDefaultBuilder(args)
 
                 //Adding new configuration provider json file custom.json.

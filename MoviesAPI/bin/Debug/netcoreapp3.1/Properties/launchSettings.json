@@ -13,7 +13,6 @@
       "commandName": "IISExpress",
       "launchUrl": "api/genres",
       "environmentVariables": {
-        "lastname": "Puzanov from env variable",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

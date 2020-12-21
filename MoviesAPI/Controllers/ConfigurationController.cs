@@ -20,7 +20,7 @@ namespace MoviesAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(configuration["ConnectionStrings:DefaultConnection"]);
+            return Ok(configuration["lastname"]);
         }
     }
 }
