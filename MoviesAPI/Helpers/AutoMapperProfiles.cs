@@ -33,6 +33,7 @@ namespace MoviesAPI.Helpers
             CreateMap<Movie, MoviePatchDTO>().ReverseMap();
         }
 
+        //methods for mapping ids between two entities to implement many-to-many relationship
         private List<GenreDTO> MapMoviesGenres(Movie movie, MovieDetailsDTO movieDetails)
         {
             var result = new List<GenreDTO>();

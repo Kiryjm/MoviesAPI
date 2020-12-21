@@ -41,6 +41,7 @@ namespace MoviesAPI
 
             //configure service for storing images in Azure store
             services.AddTransient<IFileStorageService, AzureStorageService>();
+            services.AddTransient<IHostedService, MovieInTheaterService>();
 
             //configure service for storing images in local store (wwwroot directory)
             //services.AddTransient<IFileStorageService, InAppStorageService>();

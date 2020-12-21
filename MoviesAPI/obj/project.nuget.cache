@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RcxMxi3b7Tk71YAX/2Pkv/FvaOfWk403MdET1hUWrgFXb4s6YMeUL6639s7s+DgqJg8GXFC4HWch8jbmA30+IQ==",
+  "dgSpecHash": "Fw9qvrX1rmmISUO13Ij3R49fGVqd4BmtZXiSmZbGtS6E8WPk9cD+5uhzsMXqefOLxcQ7HPvn+SnGTrEWvMonBg==",
   "success": true,
   "projectFilePath": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
   "expectedPackageFiles": [
@@ -68,6 +68,7 @@
     "C:\\Users\\Kirill\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\system.linq.dynamic.core\\1.2.6\\system.linq.dynamic.core.1.2.6.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.net.nameresolution\\4.3.0\\system.net.nameresolution.4.3.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",

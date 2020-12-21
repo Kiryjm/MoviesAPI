@@ -11,6 +11,8 @@ using MoviesAPI.DTOs;
 using MoviesAPI.Entities;
 using MoviesAPI.Helpers;
 using MoviesAPI.Services;
+using System.Linq.Dynamic.Core;
+using Microsoft.Extensions.Logging;
 
 namespace MoviesAPI.Controllers
 {
@@ -22,13 +24,17 @@ namespace MoviesAPI.Controllers
         private readonly IMapper mapper;
         private readonly IFileStorageService fileStorageService;
         private readonly string containerName = "movies";
+        private readonly ILogger<MoviesController> logger;
 
         public MoviesController(ApplicationDbContext context, 
-            IMapper mapper, IFileStorageService fileStorageService)
+            IMapper mapper, 
+            IFileStorageService fileStorageService,
+            ILogger<MoviesController> logger)
         {
             this.context = context;
             this.mapper = mapper;
             this.fileStorageService = fileStorageService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -79,6 +85,21 @@ namespace MoviesAPI.Controllers
             {
                 moviesQueryable = moviesQueryable.Where(x => x.MoviesGenres.Select(y => y.GenreId)
                     .Contains(filterMoviesDTO.GenreId));
+            }
+
+            if (!string.IsNullOrEmpty(filterMoviesDTO.OrderingField))
+            {
+                try
+                {
+                    moviesQueryable = moviesQueryable
+                        .OrderBy(
+                            $"{filterMoviesDTO.OrderingField} {(filterMoviesDTO.AscendingOrder ? "ascending" : "descending")}");
+                }
+                catch
+                {
+                    //log this
+                    logger.LogWarning("Could not order by field: " + filterMoviesDTO.OrderingField);
+                }
             }
 
             //why HttpContext not HttpContextExtension???
