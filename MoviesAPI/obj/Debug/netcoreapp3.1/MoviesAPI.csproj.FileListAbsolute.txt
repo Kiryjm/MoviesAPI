@@ -95,4 +95,10 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCor
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csproj.CoreCompileInputs.cache
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\MoviesAPI.xml
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.xml

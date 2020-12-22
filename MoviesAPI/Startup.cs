@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -18,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MoviesAPI.Filters;
 using MoviesAPI.Services;
 
@@ -50,6 +52,31 @@ namespace MoviesAPI
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
+
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Description = "This is a Web API for Movies operations",
+                    TermsOfService = new Uri("https://udemy.com/user/felipegaviln/"),
+                    License = new OpenApiLicense()
+                    {
+                        Name = "MIT"
+                    },
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Felipe Gavilan",
+                        Email = "felipe_gavilan887@hotmail.com",
+                        Url = new Uri("https://gavilan.blog/")
+                    }
+                });
+
+                //adding xml comments to the code
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                config.IncludeXmlComments(xmlPath);
+            });
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -98,6 +125,13 @@ namespace MoviesAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
+            //user can access visual documentation to explore endpoints of app
+            app.UseSwaggerUI(config =>
+            {
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "MoviesAPI");
+            });
 
             if (env.IsDevelopment())
             {

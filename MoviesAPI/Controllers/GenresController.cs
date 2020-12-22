@@ -47,8 +47,10 @@ namespace MoviesAPI.Controllers
             return genresDTOs;
         }
 
+        [ProducesResponseType(404)]
+        [ProducesResponseType(typeof(GenreDTO), 200)]
         [HttpGet("{Id:int}", Name = "getGenre")] //api/genres/1
-        public async Task<ActionResult<GenreDTO>> Get(int Id, string param2)
+        public async Task<ActionResult<GenreDTO>> Get(int Id)
         {
             var genre = await context.Genres.FirstOrDefaultAsync(x => x.Id == Id);
             if (genre == null)
@@ -90,7 +92,11 @@ namespace MoviesAPI.Controllers
             return NoContent();
 
         }
-
+        /// <summary>
+        /// Delete a genre
+        /// </summary>
+        /// <param name="id"> id of the genre to delete</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
