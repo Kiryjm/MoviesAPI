@@ -12,6 +12,8 @@ using MoviesAPI.Entities;
 using MoviesAPI.Helpers;
 using MoviesAPI.Services;
 using System.Linq.Dynamic.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace MoviesAPI.Controllers
@@ -128,6 +130,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Post([FromForm]MovieCreationDTO movieCreation)
         {
             var movie = mapper.Map<Movie>(movieCreation);
@@ -165,6 +168,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Put(int id, [FromForm] MovieCreationDTO movieCreation)
         {
             var movieDB = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
@@ -199,6 +203,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<MoviePatchDTO> patchDocument)
         {
             if (patchDocument == null)
@@ -230,6 +235,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             var exists = await context.Movies.AnyAsync(x => x.Id == id);

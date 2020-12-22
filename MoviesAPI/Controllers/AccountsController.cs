@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MoviesAPI.DTOs;
+using MoviesAPI.Helpers;
 
 namespace MoviesAPI.Controllers
 {
@@ -48,7 +50,7 @@ namespace MoviesAPI.Controllers
 
             if (result.Succeeded)
             {
-                return BuildToken(model);
+                return await BuildToken(model);
             }
             else
             {
@@ -64,7 +66,7 @@ namespace MoviesAPI.Controllers
 
             if (result.Succeeded)
             {
-                return BuildToken(model);
+                return await BuildToken(model);
             }
             else
             {
@@ -74,17 +76,17 @@ namespace MoviesAPI.Controllers
 
         [HttpPost("RenewToken")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult<UserToken> Renew()
+        public async Task<ActionResult<UserToken>> Renew()
         {
             var userInfo = new UserInfo
             {
                 EmailAddress = HttpContext.User.Identity.Name
             };
 
-            return BuildToken(userInfo);
+            return await BuildToken(userInfo);
         }
 
-        private UserToken BuildToken(UserInfo userInfo)
+        private async Task<UserToken> BuildToken(UserInfo userInfo)
         {
             //Claim - key-value pair trusted piece of data about the user
             var claims = new List<Claim>()
@@ -93,11 +95,16 @@ namespace MoviesAPI.Controllers
                 new Claim(ClaimTypes.Email, userInfo.EmailAddress)
             };
 
+            var identityUser = await _userManager.FindByEmailAsync(userInfo.EmailAddress);
+            var claimsDB = await _userManager.GetClaimsAsync(identityUser);
+
+            claims.AddRange(claimsDB);
+
             //only users which have secret security key be able to create valid token
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["jwt:key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            //token valid for 1 year
+            //token valid for 20 minutes
             var expiration = DateTime.UtcNow.AddMinutes(20);
 
             JwtSecurityToken token = new JwtSecurityToken(
@@ -111,6 +118,66 @@ namespace MoviesAPI.Controllers
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration
             };
+        }
+
+        [HttpGet("users")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+
+        public async Task<ActionResult<List<UserDTO>>> Get([FromQuery] PaginationDTO pagination)
+        {
+            var queryable = context.Users.AsQueryable();
+            queryable = queryable.OrderBy(x => x.Email);
+            await HttpContext.InsertPaginationParametersInResponse(queryable, pagination.RecordsPerPage);
+            var users = await queryable.Paginate(pagination).ToListAsync();
+            return mapper.Map<List<UserDTO>>(users);
+        }
+
+        [HttpGet("Roles")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+
+        public async Task<ActionResult<List<string>>> GetRoles()
+        {
+            return await context.Roles.Select(x => x.Name).ToListAsync();
+        }
+
+        [HttpPost("AssignRole")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+
+        public async Task<ActionResult> AssignRole(EditRoleDTO editRole)
+        {
+            var user = await _userManager.FindByIdAsync(editRole.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            //1st way of assigning role to user: adding claim
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, editRole.RoleName));
+
+            //2nd way of assigning role to user: adding role directly
+            //await _userManager.AddToRoleAsync(user, editRole.RoleName);
+
+            return NoContent();
+        }
+
+        [HttpPost("RemoveRole")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+
+        public async Task<ActionResult> RemoveRole(EditRoleDTO editRole)
+        {
+            var user = await _userManager.FindByIdAsync(editRole.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            //1st way of removing role from user: removing claim
+            await _userManager.RemoveClaimAsync(user, new Claim(ClaimTypes.Role, editRole.RoleName));
+
+            //2nd way of removing role from user: adding role directly
+            //await _userManager.RemoveFromRoleAsync(user, editRole.RoleName);
+
+            return NoContent();
         }
     }
 }
