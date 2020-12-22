@@ -36,6 +36,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet] //api/genres
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<List<GenreDTO>>> Get()
         {
             var genres =  await context.Genres.AsNoTracking().ToListAsync();

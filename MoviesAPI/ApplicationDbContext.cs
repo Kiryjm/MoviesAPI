@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MoviesAPI.Entities;
 
 namespace MoviesAPI
 {
-    public class ApplicationDbContext : DbContext
+    //To implement bearer authentication scheme on app we should inherit ApplicationDbContext from IdentityDbContext.
+    //Press Ctrl+dot to allow Visual Studio installing required package.
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext([NotNull] DbContextOptions options) : base(options)
         {

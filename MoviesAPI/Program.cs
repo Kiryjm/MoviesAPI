@@ -19,13 +19,6 @@ namespace MoviesAPI
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             //This method configures severa configuration providers
             Host.CreateDefaultBuilder(args)
-
-                //Adding new configuration provider json file custom.json.
-                //It will be the last provider in order and hence will have highest precedence for app
-                //.ConfigureAppConfiguration((env, config) =>
-                //    {
-                //        config.AddJsonFile("custom.json", optional: true, reloadOnChange: true);
-                //    })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
