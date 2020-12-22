@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace MoviesAPI.Controllers
 {
     [ApiController]
     [Route("api/people")]
+    [EnableCors(PolicyName = "AllowAPIRequestIO")]
     public class PeopleController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -116,6 +118,7 @@ namespace MoviesAPI.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        [DisableCors]
         public async Task<ActionResult> Delete(int id)
         {
             var exists = await context.People.AnyAsync(x => x.Id == id);
