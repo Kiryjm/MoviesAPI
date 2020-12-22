@@ -53,6 +53,9 @@ namespace MoviesAPI
 
             services.AddAutoMapper(typeof(Startup));
 
+            //using hashing
+            services.AddTransient<HashService>();
+
             //configure service for storing images in Azure store
             services.AddTransient<IFileStorageService, AzureStorageService>();
 
