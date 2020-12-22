@@ -39,10 +39,13 @@ namespace MoviesAPI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //allowa using certain origin to use cross resources requests with any headers
+            //allows using certain origin to use cross resources requests with any headers
             services.AddCors(options => options.AddPolicy("AllowAPIRequestIO",
                 builder => builder.WithOrigins("https://www.apirequest.io")
                     .WithMethods("GET", "POST").AllowAnyHeader()));
+
+            //encrypting service
+            services.AddDataProtection();
 
             services.AddControllers(options => { options.Filters.Add(typeof(MyExceptionFilter)); })
                 .AddNewtonsoftJson()
