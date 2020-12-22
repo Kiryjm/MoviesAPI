@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -70,6 +72,18 @@ namespace MoviesAPI.Controllers
             }
         }
 
+        [HttpPost("RenewToken")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult<UserToken> Renew()
+        {
+            var userInfo = new UserInfo
+            {
+                EmailAddress = HttpContext.User.Identity.Name
+            };
+
+            return BuildToken(userInfo);
+        }
+
         private UserToken BuildToken(UserInfo userInfo)
         {
             //Claim - key-value pair trusted piece of data about the user
@@ -84,7 +98,7 @@ namespace MoviesAPI.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             //token valid for 1 year
-            var expiration = DateTime.UtcNow.AddYears(1);
+            var expiration = DateTime.UtcNow.AddMinutes(20);
 
             JwtSecurityToken token = new JwtSecurityToken(
                 issuer: null,
