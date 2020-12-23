@@ -41,7 +41,8 @@ namespace MoviesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                    sqlServer => sqlServer.UseNetTopologySuite()));
 
             //allows using certain origin to use cross resources requests with any headers
             services.AddCors(options => options.AddPolicy("AllowAPIRequestIO",
