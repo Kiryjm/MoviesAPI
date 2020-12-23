@@ -36,21 +36,37 @@ namespace MoviesAPI.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet] //api/genres
+        [HttpGet(Name = "getGenres")] //api/genres
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [EnableCors(PolicyName = "AllowAPIRequestIO")]
-        public async Task<ActionResult<List<GenreDTO>>> Get()
+        public async Task<IActionResult> Get(bool includeHATEOAS = true)
         {
             var genres =  await context.Genres.AsNoTracking().ToListAsync();
             var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
-           
-            return genresDTOs;
+            var resourceCollection = new ResourceCollection<GenreDTO>(genresDTOs);
+
+            if (includeHATEOAS)
+            {
+                genresDTOs.ForEach(genre => GenerateLinks(genre));
+                resourceCollection.Links.Add(new Link(Url.Link("getGenres", new { }), rel: "self", method:"GET"));
+                resourceCollection.Links.Add(new Link(Url.Link("createGenre", new { }), rel: "self", method: "POST"));
+                return Ok(resourceCollection);
+            }
+
+            return Ok(genresDTOs);
+        }
+
+        private void GenerateLinks(GenreDTO genreDTO)
+        {
+            genreDTO.Links.Add(new Link(Url.Link("getGenre", new { Id = genreDTO.Id }), "get-genre", method: "GET"));
+            genreDTO.Links.Add(new Link(Url.Link("putGenre", new { Id = genreDTO.Id }), "put-genre", method: "PUT"));
+            genreDTO.Links.Add(new Link(Url.Link("deleteGenre", new { Id = genreDTO.Id }), "delete-genre", method: "DELETE"));
         }
 
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(GenreDTO), 200)]
         [HttpGet("{Id:int}", Name = "getGenre")] //api/genres/1
-        public async Task<ActionResult<GenreDTO>> Get(int Id)
+        public async Task<ActionResult<GenreDTO>> Get(int Id, bool includeHATEOAS = true)
         {
             var genre = await context.Genres.FirstOrDefaultAsync(x => x.Id == Id);
             if (genre == null)
@@ -59,10 +75,16 @@ namespace MoviesAPI.Controllers
             }
 
             var genreDTO = mapper.Map<GenreDTO>(genre);
+
+            if (includeHATEOAS)
+            {
+                GenerateLinks(genreDTO);
+            }
+
             return genreDTO;
         }
 
-        [HttpPost]
+        [HttpPost(Name = "createGenre")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<CreatedAtRouteResult> Post([FromBody] GenreCreationDTO genreCreation)
         {
@@ -78,7 +100,7 @@ namespace MoviesAPI.Controllers
             return new CreatedAtRouteResult("getGenre", new { genreDTO.Id }, genreDTO);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "putGenre")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Put(int id, [FromBody] GenreCreationDTO genreCreation)
         {
@@ -97,7 +119,7 @@ namespace MoviesAPI.Controllers
         /// </summary>
         /// <param name="id"> id of the genre to delete</param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "deleteGenre")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {

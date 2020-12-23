@@ -44,7 +44,7 @@ namespace MoviesAPI.Controllers
 
         [ProducesResponseType(400)]
         [ProducesResponseType(typeof(UserToken), 200)]
-        [HttpPost("Create")]
+        [HttpPost("Create", Name = "createUser")]
         public async Task<ActionResult<UserToken>> CreateUser([FromBody] UserInfo model)
         {
             var user = new IdentityUser {UserName = model.EmailAddress, Email = model.EmailAddress};
@@ -60,7 +60,7 @@ namespace MoviesAPI.Controllers
             }
         }
 
-        [HttpPost("Login")]
+        [HttpPost("Login", Name = "Login")]
         public async Task<ActionResult<UserToken>> Login([FromBody] UserInfo model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.EmailAddress,
