@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using MoviesAPI.DTOs;
 using MoviesAPI.Entities;
 using MoviesAPI.Filters;
+using MoviesAPI.Helpers;
 using MoviesAPI.Services;
 
 namespace MoviesAPI.Controllers
@@ -39,19 +40,20 @@ namespace MoviesAPI.Controllers
         [HttpGet(Name = "getGenres")] //api/genres
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [EnableCors(PolicyName = "AllowAPIRequestIO")]
-        public async Task<IActionResult> Get(bool includeHATEOAS = true)
+        [ServiceFilter(typeof(GenreHATEOASAttribute))]
+        public async Task<IActionResult> Get()
         {
             var genres =  await context.Genres.AsNoTracking().ToListAsync();
             var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
-            var resourceCollection = new ResourceCollection<GenreDTO>(genresDTOs);
 
-            if (includeHATEOAS)
-            {
-                genresDTOs.ForEach(genre => GenerateLinks(genre));
-                resourceCollection.Links.Add(new Link(Url.Link("getGenres", new { }), rel: "self", method:"GET"));
-                resourceCollection.Links.Add(new Link(Url.Link("createGenre", new { }), rel: "self", method: "POST"));
-                return Ok(resourceCollection);
-            }
+            //if (includeHATEOAS)
+            //{
+            //    var resourceCollection = new ResourceCollection<GenreDTO>(genresDTOs);
+            //    genresDTOs.ForEach(genre => GenerateLinks(genre));
+            //    resourceCollection.Links.Add(new Link(Url.Link("getGenres", new { }), rel: "self", method: "GET"));
+            //    resourceCollection.Links.Add(new Link(Url.Link("createGenre", new { }), rel: "self", method: "POST"));
+            //    return Ok(resourceCollection);
+            //}
 
             return Ok(genresDTOs);
         }
@@ -65,8 +67,9 @@ namespace MoviesAPI.Controllers
 
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(GenreDTO), 200)]
+        [ServiceFilter(typeof(GenreHATEOASAttribute))]
         [HttpGet("{Id:int}", Name = "getGenre")] //api/genres/1
-        public async Task<ActionResult<GenreDTO>> Get(int Id, bool includeHATEOAS = true)
+        public async Task<ActionResult<GenreDTO>> Get(int Id)
         {
             var genre = await context.Genres.FirstOrDefaultAsync(x => x.Id == Id);
             if (genre == null)
@@ -76,10 +79,10 @@ namespace MoviesAPI.Controllers
 
             var genreDTO = mapper.Map<GenreDTO>(genre);
 
-            if (includeHATEOAS)
-            {
-                GenerateLinks(genreDTO);
-            }
+            //if (includeHATEOAS)
+            //{
+            //    GenerateLinks(genreDTO);
+            //}
 
             return genreDTO;
         }
