@@ -20,7 +20,7 @@ namespace MoviesAPI.Controllers
     [ApiController]
     [Route("api/people")]
     [EnableCors(PolicyName = "AllowAPIRequestIO")]
-    public class PeopleController : ControllerBase
+    public class PeopleController : CustomBaseController
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
@@ -28,7 +28,7 @@ namespace MoviesAPI.Controllers
         private readonly string containerName = "people";
 
         public PeopleController(ApplicationDbContext context, IMapper mapper, 
-            IFileStorageService fileStorageService)
+            IFileStorageService fileStorageService) : base(context, mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -38,22 +38,13 @@ namespace MoviesAPI.Controllers
         [HttpGet(Name = "getPeople")]
         public async Task<ActionResult<List<PersonDTO>>> Get([FromQuery]PaginationDTO pagination)
         {
-            var queryable = context.People.AsQueryable();
-            await HttpContext.InsertPaginationParametersInResponse(queryable, pagination.RecordsPerPage);
-            var people = await queryable.Paginate(pagination).ToListAsync();
-            return mapper.Map<List<PersonDTO>>(people);
+            return await Get<Person, PersonDTO>(pagination);
         }
 
         [HttpGet("{id}", Name = "getPerson")]
         public async Task<ActionResult<PersonDTO>> Get(int id)
         {
-            var person = await context.People.FirstOrDefaultAsync(x => x.Id ==id);
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            return mapper.Map<PersonDTO>(person);
+            return await Get<Person, PersonDTO>(id);
         }
 
         [HttpPost]
@@ -116,52 +107,19 @@ namespace MoviesAPI.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<PersonPatchDTO> patchDocument)
+        {
+            return await Patch<Person, PersonPatchDTO>(id, patchDocument);
+        }
+
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         [DisableCors]
         public async Task<ActionResult> Delete(int id)
         {
-            var exists = await context.People.AnyAsync(x => x.Id == id);
-            if (!exists)
-            {
-                return NotFound();
-            }
-            context.Remove(new Person { Id = id });
-            await context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        [HttpPatch("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
-        public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<PersonPatchDTO> patchDocument)
-        {
-            if (patchDocument == null)
-            {
-                return BadRequest();
-            }
-
-            var entityFromDB = await context.People.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (entityFromDB == null)
-            {
-                return NotFound();
-            }
-
-            var entityDTO = mapper.Map<PersonPatchDTO>(entityFromDB);
-
-            //apply changes from json document to the entityDTO
-            patchDocument.ApplyTo(entityDTO, ModelState);
-            var isValid = TryValidateModel(entityDTO);
-            if (!isValid)
-            {
-                //passing ModelState to indicate occured validation errors
-                return BadRequest(ModelState);
-            }
-
-            mapper.Map(entityDTO, entityFromDB);
-            await context.SaveChangesAsync();
-            return NoContent();
+            return await Delete<Person>(id);
         }
     }
 }

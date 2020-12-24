@@ -7,7 +7,7 @@ using MoviesAPI.Validations;
 
 namespace MoviesAPI.Entities
 {
-    public class Genre
+    public class Genre: IId
     {
         public int Id { get; set; }
 

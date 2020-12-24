@@ -20,7 +20,7 @@ namespace MoviesAPI.Controllers
 {
     [ApiController]
     [Route("/api/movies")]
-    public class MoviesController : ControllerBase
+    public class MoviesController : CustomBaseController
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
@@ -31,7 +31,7 @@ namespace MoviesAPI.Controllers
         public MoviesController(ApplicationDbContext context, 
             IMapper mapper, 
             IFileStorageService fileStorageService,
-            ILogger<MoviesController> logger)
+            ILogger<MoviesController> logger) : base(context, mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -115,18 +115,13 @@ namespace MoviesAPI.Controllers
         [HttpGet("{id}", Name = "getMovie")]
         public async Task<ActionResult<MovieDetailsDTO>> Get(int id)
         {
-            var movie = await context.Movies
-                    //Include in LINQ is like join on ids of related tables
+            //Include in LINQ is like join on ids of related tables
+            var queryable = context.Movies
                 .Include(x => x.MoviesActors).ThenInclude(x => x.Person)
-                    .Include(x => x.MoviesGenres).ThenInclude(x => x.Genre)
-                    .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.MoviesGenres).ThenInclude(x => x.Genre)
+                .AsQueryable();
 
-            if (movie == null)
-            {
-                return NotFound();
-            }
-
-            return mapper.Map<MovieDetailsDTO>(movie);
+            return await Get<Movie, MovieDetailsDTO>(id, queryable);
         }
 
         [HttpPost]
@@ -206,47 +201,14 @@ namespace MoviesAPI.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<MoviePatchDTO> patchDocument)
         {
-            if (patchDocument == null)
-            {
-                return BadRequest();
-            }
-
-            var entityFromDB = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (entityFromDB == null)
-            {
-                return NotFound();
-            }
-
-            var entityDTO = mapper.Map<MoviePatchDTO>(entityFromDB);
-
-            //apply changes from json document to the entityDTO
-            patchDocument.ApplyTo(entityDTO, ModelState);
-            var isValid = TryValidateModel(entityDTO);
-            if (!isValid)
-            {
-                //passing ModelState to indicate occured validation errors
-                return BadRequest(ModelState);
-            }
-
-            mapper.Map(entityDTO, entityFromDB);
-            await context.SaveChangesAsync();
-            return NoContent();
+            return await Patch<Movie, MoviePatchDTO>(id, patchDocument);
         }
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
-            var exists = await context.Movies.AnyAsync(x => x.Id == id);
-            if (!exists)
-            {
-                return NotFound();
-            }
-            context.Remove(new Movie { Id = id });
-            await context.SaveChangesAsync();
-
-            return NoContent();
+            return await Delete<Movie>(id);
         }
     }
 }

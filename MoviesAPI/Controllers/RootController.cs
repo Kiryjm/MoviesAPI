@@ -10,7 +10,7 @@ namespace MoviesAPI.Controllers
 {
     [ApiController]
     [Route("api")]
-    [HttpHeaderIsPresent("x-version", "1")]
+    //[HttpHeaderIsPresent("x-version", "1")]
     public class RootController : ControllerBase
     {
         [HttpGet(Name = "getRoot")]
