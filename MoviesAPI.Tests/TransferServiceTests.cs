@@ -1,5 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using MoviesAPI.Testing;
 
 namespace MoviesAPI.Tests
@@ -14,7 +15,12 @@ namespace MoviesAPI.Tests
             Account origin = new Account() {Funds = 0};
             Account destination = new Account() { Funds = 0 };
             decimal amountToTransfer = 5m;
-            var service = new TransferService(new WireTransferValidator());
+            string errorMessage = "custom error message";
+            var mockValidateWireTransfer = new Mock<IValidateWireTransfer>();
+            mockValidateWireTransfer.Setup(x => x.Validate(origin, destination, amountToTransfer))
+                .Returns(new OperationResult(false, errorMessage));
+
+            var service = new TransferService(mockValidateWireTransfer.Object);
             Exception expectedException = null;
 
             //Testing
@@ -35,17 +41,21 @@ namespace MoviesAPI.Tests
             }
 
             Assert.IsTrue(expectedException is ApplicationException);
-            Assert.AreEqual("The origin account does not have enough funds available", expectedException.Message);
+            Assert.AreEqual(errorMessage, expectedException.Message);
         }
 
         [TestMethod]
         public void WireTransferCorrectlyEditFunds()
         {
             //Preparation
-            Account origin = new Account() {Funds = 10};
+            Account origin = new Account() { Funds = 10 };
             Account destination = new Account() { Funds = 5 };
             decimal amountToTransfer = 7m;
-            var service = new TransferService(new WireTransferValidator());
+            var mockValidateWireTransfer = new Mock<IValidateWireTransfer>();
+            mockValidateWireTransfer.Setup(x => x.Validate(origin, destination, amountToTransfer))
+                .Returns(new OperationResult(true));
+
+            var service = new TransferService(mockValidateWireTransfer.Object);
 
             //Testing
             service.WireTransfer(origin, destination, amountToTransfer);
