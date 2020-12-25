@@ -40,31 +40,13 @@ namespace MoviesAPI.Controllers
         [HttpGet(Name = "getGenres")] //api/genres
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [EnableCors(PolicyName = "AllowAPIRequestIO")]
-        [ServiceFilter(typeof(GenreHATEOASAttribute))]
         public async Task<ActionResult<List<GenreDTO>>> Get()
         {
-
             return await Get<Genre, GenreDTO>();
-            //if (includeHATEOAS)
-            //{
-            //    var resourceCollection = new ResourceCollection<GenreDTO>(genresDTOs);
-            //    genresDTOs.ForEach(genre => GenerateLinks(genre));
-            //    resourceCollection.Links.Add(new Link(Url.Link("getGenres", new { }), rel: "self", method: "GET"));
-            //    resourceCollection.Links.Add(new Link(Url.Link("createGenre", new { }), rel: "self", method: "POST"));
-            //    return Ok(resourceCollection);
-            //}
-        }
-
-        private void GenerateLinks(GenreDTO genreDTO)
-        {
-            genreDTO.Links.Add(new Link(Url.Link("getGenre", new { Id = genreDTO.Id }), "get-genre", method: "GET"));
-            genreDTO.Links.Add(new Link(Url.Link("putGenre", new { Id = genreDTO.Id }), "put-genre", method: "PUT"));
-            genreDTO.Links.Add(new Link(Url.Link("deleteGenre", new { Id = genreDTO.Id }), "delete-genre", method: "DELETE"));
         }
 
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(GenreDTO), 200)]
-        [ServiceFilter(typeof(GenreHATEOASAttribute))]
         [HttpGet("{Id:int}", Name = "getGenre")] //api/genres/1
         public async Task<ActionResult<GenreDTO>> Get(int Id)
         {
