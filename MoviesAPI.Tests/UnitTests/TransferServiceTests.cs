@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MoviesAPI.Testing;
 
-namespace MoviesAPI.Tests
+namespace MoviesAPI.Tests.UnitTests
 {
     [TestClass]
     public class TransferServiceTests

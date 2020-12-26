@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoviesAPI.Testing;
 
-namespace MoviesAPI.Tests
+namespace MoviesAPI.Tests.UnitTests
 {
     [TestClass]
     public class WireTransferValidatorTests

@@ -25,14 +25,11 @@ namespace MoviesAPI.Controllers
 
     public class GenresController : CustomBaseController
     {
-        private ILogger<GenresController> logger;
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public GenresController(ILogger<GenresController> logger, 
-            ApplicationDbContext context, IMapper mapper) : base(context, mapper)
+        public GenresController(ApplicationDbContext context, IMapper mapper) : base(context, mapper)
         {
-            this.logger = logger;
             this.context = context;
             this.mapper = mapper;
         }
