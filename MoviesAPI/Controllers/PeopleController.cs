@@ -49,7 +49,7 @@ namespace MoviesAPI.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
-        public async Task<ActionResult<PersonDTO>> Post([FromForm] PersonCreationDTO personCreation)
+        public async Task<ActionResult> Post([FromForm] PersonCreationDTO personCreation)
         {
             var person = mapper.Map<Person>(personCreation);
 
