@@ -35,7 +35,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet(Name = "getGenres")] //api/genres
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [EnableCors(PolicyName = "AllowAPIRequestIO")]
         public async Task<ActionResult<List<GenreDTO>>> Get()
         {
@@ -51,7 +51,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpPost(Name = "createGenre")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Post([FromBody] GenreCreationDTO genreCreation)
         {
             return await Post<GenreCreationDTO, Genre, GenreDTO>(genreCreation, "getGenre");
@@ -69,7 +69,7 @@ namespace MoviesAPI.Controllers
         /// <param name="id"> id of the genre to delete</param>
         /// <returns></returns>
         [HttpDelete("{id}", Name = "deleteGenre")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             if (User.Identity.IsAuthenticated)

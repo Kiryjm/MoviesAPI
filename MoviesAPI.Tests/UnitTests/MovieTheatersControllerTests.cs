@@ -47,7 +47,6 @@ namespace MoviesAPI.Tests.UnitTests
                 var theatersFromController = response.Value;
                 Assert.AreEqual(2, theatersFromController.Count);
             }
-
         }
     }
 }
