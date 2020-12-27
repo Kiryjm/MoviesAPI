@@ -16,12 +16,10 @@ namespace MoviesAPI.Controllers
     public class MovieTheatersController : ControllerBase
     {
         private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
 
-        public MovieTheatersController(ApplicationDbContext context, IMapper mapper)
+        public MovieTheatersController(ApplicationDbContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         [HttpGet]
