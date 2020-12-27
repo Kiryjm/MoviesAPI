@@ -134,6 +134,8 @@ namespace MoviesAPI.Tests.UnitTests
             var mapper = BuildMap();
 
             var controller = new GenresController(context, mapper);
+            controller.ControllerContext = BuildControllerContextWithDefaultUser();
+
             var response = await controller.Delete(1);
             var result = response as StatusCodeResult;
             Assert.AreEqual(404, result.StatusCode);
@@ -153,6 +155,8 @@ namespace MoviesAPI.Tests.UnitTests
             var context2 = BuildContext(databaseName);
 
             var controller = new GenresController(context2, mapper);
+            controller.ControllerContext = BuildControllerContextWithDefaultUser();
+
             var response = await controller.Delete(1);
             var result = response as StatusCodeResult;
             Assert.AreEqual(204, result.StatusCode);

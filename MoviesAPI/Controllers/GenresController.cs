@@ -72,6 +72,11 @@ namespace MoviesAPI.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var name = User.Identity.Name;
+            }
+
             return await Delete<Genre>(id);
         }
     }
