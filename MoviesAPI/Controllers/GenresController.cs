@@ -35,8 +35,6 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet(Name = "getGenres")] //api/genres
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [EnableCors(PolicyName = "AllowAPIRequestIO")]
         public async Task<ActionResult<List<GenreDTO>>> Get()
         {
             return await Get<Genre, GenreDTO>();

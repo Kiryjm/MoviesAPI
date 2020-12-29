@@ -88,8 +88,6 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetC
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\MoviesAPI.xml
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.xml
-G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csproj.CoreCompileInputs.cache
-G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\EFCoreSqlServerNetTopologySuite.cs
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Humanizer.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\NetTopologySuite.dll
@@ -106,3 +104,16 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win-x64\na
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.MoviesAPIUdemy - Web Deploy.json
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.ApplicationInsights.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.ApplicationInsights.AspNetCore.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AI.DependencyCollector.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AI.EventCounterCollector.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AI.PerfCounterCollector.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AI.WindowsServer.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AI.ServerTelemetryChannel.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.ApplicationInsights.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csproj.CoreCompileInputs.cache
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\EFCoreSqlServerNetTopologySuite.cs
