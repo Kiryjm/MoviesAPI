@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "n85m8A6zfW35gtRz8EDMIGe9mam8ojM7yzHxa6RpI3Jw69ex+gL09GxjkUkNc0mWrWz/IIcWhUGBjcQrZ6V7qw==",
+  "dgSpecHash": "duud+p6FqRiHySuhks8n45aMpk+xPL2X9RuARUxnBfb+dtq56DJ90++OKyIYtZFBAMEyfqck131FX8TkL3VtUA==",
   "success": true,
   "projectFilePath": "G:\\root\\C#\\Udemy\\MoviesAPI\\MoviesAPI\\MoviesAPI.csproj",
   "expectedPackageFiles": [
@@ -52,10 +52,13 @@
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.configuration.json\\2.1.0\\microsoft.extensions.configuration.json.2.1.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
-    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\2.1.1\\microsoft.extensions.fileproviders.abstractions.2.1.1.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks\\5.0.1\\microsoft.extensions.diagnostics.healthchecks.5.0.1.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks.abstractions\\5.0.1\\microsoft.extensions.diagnostics.healthchecks.abstractions.5.0.1.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks.entityframeworkcore\\5.0.1\\microsoft.extensions.diagnostics.healthchecks.entityframeworkcore.5.0.1.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\2.1.1\\microsoft.extensions.fileproviders.physical.2.1.1.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\2.1.1\\microsoft.extensions.filesystemglobbing.2.1.1.nupkg.sha512",
-    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\2.1.1\\microsoft.extensions.hosting.abstractions.2.1.1.nupkg.sha512",
+    "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\5.0.0\\microsoft.extensions.hosting.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.identity.core\\5.0.1\\microsoft.extensions.identity.core.5.0.1.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.identity.stores\\5.0.1\\microsoft.extensions.identity.stores.5.0.1.nupkg.sha512",
     "C:\\Users\\Kirill\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",

@@ -115,5 +115,10 @@ G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.AI.Server
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.ApplicationInsights.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Diagnostics.HealthChecks.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+G:\root\C#\Udemy\MoviesAPI\MoviesAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\MoviesAPI.csproj.CoreCompileInputs.cache
 G:\root\C#\Udemy\MoviesAPI\MoviesAPI\obj\Debug\netcoreapp3.1\EFCoreSqlServerNetTopologySuite.cs

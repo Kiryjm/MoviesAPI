@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +42,10 @@ namespace MoviesAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //Checking health status of DB connection
+            services.AddHealthChecks()
+                .AddDbContextCheck<ApplicationDbContext>(tags: new []{ "ready" });
+            
             services.AddApplicationInsightsTelemetry();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -164,6 +169,24 @@ namespace MoviesAPI
             //app.UseCors(builder => 
             //    builder.WithOrigins("https://www.apirequest.io")
             //        .WithMethods("GET", "POST").AllowAnyHeader());
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
+                {
+                    ResponseWriter = HealthCheckResponseWriter.WriteResponseReadiness,
+                    Predicate = (check) => check.Tags.Contains("ready")
+                });
+            });
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/health/live", new HealthCheckOptions
+                {
+                    ResponseWriter = HealthCheckResponseWriter.WriteResponseLiveness,
+                    Predicate = (check) => !check.Tags.Contains("ready")
+                });
+            });
 
             app.UseEndpoints(endpoints =>
             {
