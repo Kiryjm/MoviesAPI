@@ -30,6 +30,15 @@ namespace MoviesAPI
             base.OnModelCreating(modelBuilder);
         }
 
+        private void TempSeed(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Genre>()
+                .HasData(new Genre() { Id = 9, Name = "Comedy" });
+
+            modelBuilder.Entity<Genre>()
+                .HasData(new Genre() { Id = 10, Name = "Genre for Azure App Service" });
+        }
+
         //Populate database with some data: Genres, Movies, Persons, MoviesGenres, MoviesActors
         private void SeedData(ModelBuilder modelBuilder)
         {

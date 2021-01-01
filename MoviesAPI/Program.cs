@@ -17,7 +17,7 @@ namespace MoviesAPI
         {
            var webHost = CreateHostBuilder(args).Build();
 
-           //Automatically run all pending migrations 
+           //Automatically apply all pending migrations to database 
            using (var scope = webHost.Services.CreateScope())
            {
                var context = scope.ServiceProvider.GetService<ApplicationDbContext>();

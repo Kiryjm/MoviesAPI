@@ -24,7 +24,7 @@ namespace MoviesAPI.Tests.UnitTests
 
             var movies = new List<Movie>()
             {
-                new Movie(){Title = "Movie 1", ReleaseDate = new DateTime(2020, 1,1), InTheaters = false},
+                new Movie(){Title = "Movie 1", ReleaseDate = new DateTime(2021, 1,1), InTheaters = false},
                 new Movie(){Title = "Future Movie", ReleaseDate = DateTime.Today.AddYears(1), InTheaters = false},
                 new Movie(){Title = "In Theaters Movie", ReleaseDate = DateTime.Today.AddYears(-1), InTheaters = true}
             };
